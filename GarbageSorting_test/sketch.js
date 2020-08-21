@@ -183,7 +183,7 @@ function modelReady() {
     //   select('#modelStatus').html('Custom Model Loaded!');
     // });
 	
-    classifier.load('./modelmodel20200612/model.json', function() {
+    classifier.load('./model20200612/model.json', function() {
     select('#modelStatus').html('Custom Model Loaded!');
     });
 	
