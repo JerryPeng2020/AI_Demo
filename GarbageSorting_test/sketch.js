@@ -177,7 +177,7 @@ function gotOpen() {
 
 // A function to be called when the model has been loaded
 function modelReady() {
-    select('#modelStatus').html('MobileNet加载成功!');
+    select('#modelStatus').html('MobileNet加载成功!!!');
     // If you want to load a pre-trained model at the start
     // classifier.load('./model/model.json', function() {
     //   select('#modelStatus').html('Custom Model Loaded!');
