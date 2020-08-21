@@ -62,7 +62,7 @@ function setup() {
   select('#confidence').style('font-size: 20px;');
 
   // Extract the already learned features from MobileNet
-  featureExtractor = ml5.featureExtractor('MobileNet', modelReady);
+  featureExtractor = ml5.featureExtractor('./model20200612/model.json', modelReady);
 
   // Create a new classifier using those features and give the video we want to use
   const options = { numLabels: 5 };
