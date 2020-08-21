@@ -182,6 +182,11 @@ function modelReady() {
     // classifier.load('./model/model.json', function() {
     //   select('#modelStatus').html('Custom Model Loaded!');
     // });
+	
+    classifier.load('./modelmodel20200612/model.json', function() {
+    select('#modelStatus').html('Custom Model Loaded!');
+    });
+	
   }
   
   // Classify the current frame.
