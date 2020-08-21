@@ -182,10 +182,10 @@ function modelReady() {
     // classifier.load('./model/model.json', function() {
     //   select('#modelStatus').html('Custom Model Loaded!');
     // });
-    select('#modelStatus').html('Load Custom Model fail!');
+   // select('#modelStatus').html('Load Custom Model fail!');
 	
-    classifier.load('./model20200612/model.json', function() {
-    select('#modelStatus').html('Custom Model Loaded!');
+   // classifier.load('./model20200612/model.json', function() {
+  //  select('#modelStatus').html('Custom Model Loaded!');
     });
 	
 	
