@@ -265,7 +265,7 @@ function modelReady() {
     loadBtn = select('#load');
     loadBtn.changed(function() {
       classifier.load(loadBtn.elt.files, function() {
-        select('#modelStatus').html('Custom Model Loaded!');
+      //  select('#modelStatus').html('Custom Model Loaded!');
       });
     });
   }
