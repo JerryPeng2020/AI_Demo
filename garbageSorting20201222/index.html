@@ -1,0 +1,242 @@
+<!--
+  Copyright 2020 Pinecone.AI(松果机器人）. All Rights Reserved.
+
+  Project: Tensorflow Garbage Sorting (JS version)
+  Author:  Jerry Peng
+  Date:    Dec. 10th, 2020
+
+
+==============================================================================
+-->
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>垃圾分类</title>
+
+  <!-- Style libraries -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-teal.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+  <!-- Core libraries -->
+  <!--
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.7.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-data@2.7.0/dist/tf-data.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+  -->
+  <script src="libraries/tf-data.min.js"></script>
+  <script src="libraries/tf.min.js"></script>
+  <script src="libraries/p5.min.js"></script>
+
+  <!-- Application libraries -->
+  <script  src="libraries/controller_dataset.js"></script>
+  <script language="javascript" type="text/javascript" src="libraries/p5.serialport.js"></script>
+
+  <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <b>基于TensorFlow深度学习的智能垃圾分类系统</b>
+  </header>
+
+  <!-- Boot -->
+  <div id="no-webcam">
+      没有检测到相机！ <br/>
+      为了运行本系统，请连接好并允许打开相机。
+  </div>
+
+  <div id="status">加载模型中...</div>
+
+
+  <!-- canvas -->
+  <div class="canvas" id="controller" style="display:none">
+    <!-- 1st row: main-panel -->
+    <div class="panel main-panel">
+      <!-- 1st column: IO with local (serial port & model files) -->
+      <div class="IO-column">
+        <!-- serial port -->
+        <div class="dropdown">
+          <label>选择设备串口</label>
+          <div class="select">
+            <select id="device-port">
+              <option value="null">请选择设备对应串口名称</option>
+            </select>
+          </div>
+        </div>
+        </br>
+        <!-- model -->
+        <div class="model">
+          <label>选择模型文件</label> 
+          </br>
+          <p>模型文件 <input type="file" id="upload-json"/> </p>
+          <p>权重文件 <input type="file" id="upload-weights"/> </p>
+
+          </br>
+          <div class="model-buttons">
+            <button id="load-model"> <span>加载模型</span> </button>
+            &nbsp &nbsp
+            <button id="save-model"> <span>保存模型</span> </button>
+
+          </div>
+        </div>
+      </div>
+      <!-- 2nd column: camera frame -->
+      <div class="webcam-box-outer">
+        <div class="webcam-box-inner">
+            <video autoplay playsinline muted id="webcam" width="224" height="224"></video> 
+        </div>
+      </div>
+        
+      <!-- 2nd column: Hyper params -->
+      <div class="hyper-params">
+        <!-- Learning rate -->
+        <div class="dropdown">
+          <label>学习率（Learning Rate）</label>
+          <div class="select">
+            <select id="learningRate">
+              <option value="0.00001">0.00001</option>
+              <option selected value="0.0001">0.0001</option>
+              <option value="0.01">0.001</option>
+              <option value="0.03">0.003</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Batch size -->
+        <div class="dropdown">
+          <label>批次大小（Batch Size）</label>
+          <div class="select">
+            <select id="batchSizeFraction">
+              <option value="0.05">0.05</option>
+              <option value="0.1">0.1</option>
+              <option selected value="0.4">0.4</option>
+              <option value="1">1</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Epochs -->
+        <div class="dropdown">
+          <label>训练回合（Epochs）</label>
+          <div class="select">
+            <select id="epochs">
+              <option value="10">10</option>
+              <option selected value="20">20</option>
+              <option value="40">40</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Hidden units -->
+        <div class="dropdown">
+          <label>隐藏单元（Hidden units）</label>
+          <div class="select">
+            <select id="dense-units">
+              <option value="10">10</option>
+              <option selected value="100">100</option>
+              <option value="200">200</option>
+            </select>
+          </div>
+        </div>
+          
+        <!-- Big buttons. -->
+        <div class="column big-buttons">
+          <button id="train">
+            <img width=40 height="40" src="./images/button.svg" />
+            <span id="train-status">训练模型</span>
+          </button>
+          <br/>
+          <button id="predict">
+            <img width="40" height="40" src="./images/button.svg" />
+            <span>运行检测</span>
+          </button>
+          </br>
+          <p class="class-result"> 检测结果：<span id="result">无</span></p> 
+          <p class="class-result"> 确认度：  &nbsp &nbsp <span id="result-probability">0</span> %</p>
+        </div><!-- /.big-button-row -->
+      </div><!-- /.hyper-params -->
+    </div><!-- /.panel main-panel"-->
+
+    <!-- 2nd row: sample-panel -->
+    <div class="panel sample-panel">
+      <div class="sample-cell">
+        <div class="thumb-box-outer">
+          <div class="thumb-box-inner">
+            <canvas class="thumb" width=224 height=224 id="background-thumb"></canvas>
+          </div>
+          <button class="record-button" id="background"/><span>添加样本</span></button>
+        </div>
+        <p>
+          <span class="class-name">背景:</span> <span class="class-name" id="background-total">0</span>
+        </p>
+      </div><!-- ./sample-cell -->
+
+      <div class="sample-cell">
+        <div class="recycle">
+          <div class="thumb-box-outer">
+            <div class="thumb-box-inner">
+              <canvas class="thumb" width=224 height=224 id="recycle-thumb"></canvas>
+            </div>
+              <button class="record-button" id="recycle"/><span>添加样本</span></button>
+          </div>
+          <p>
+            <span class="class-name">可回收物:</span> <span class="class-name" id="recycle-total">0</span> 
+          </p>
+        </div>
+      </div><!-- ./sample-cell -->
+
+      <div class="sample-cell">
+        <div class="noxious">
+          <div class="thumb-box-outer">
+            <div class="thumb-box-inner">
+              <canvas class="thumb" width=224 height=224 id="noxious-thumb"></canvas>
+            </div>
+            <button class="record-button" id="noxious"/><span>添加样本</span></button>
+          </div>
+          <p>
+            <span class="class-name">有害垃圾:</span> <span class="class-name" id="noxious-total">0</span>
+          </p>
+        </div>
+      </div><!-- ./sample-cell -->
+
+      <div class="sample-cell">
+        <div class="wet">
+          <div class="thumb-box-outer">
+            <div class="thumb-box-inner">
+              <canvas class="thumb" width=224 height=224 id="wet-thumb"></canvas>
+            </div>
+            <button class="record-button" id="wet"/><span>添加样本</span></button>
+          </div>
+          <p>
+            <span class="class-name">餐厨垃圾:</span> <span class="class-name" id="wet-total">0</span> 
+          </p>
+        </div>
+      </div><!-- ./sample-cell -->
+
+      <div class="sample-cell">
+        <div class="dry">
+          <div class="thumb-box-outer">
+            <div class="thumb-box-inner">
+              <canvas class="thumb" width=224 height=224 id="dry-thumb"></canvas>
+            </div>
+            <button class="record-button" id="dry"/><span>添加样本</span></button>
+          </div>
+          <p>
+            <span class="class-name">其它垃圾:</span> <span class="class-name" id="dry-total">0</span> 
+          </p>
+        </div>
+      </div><!-- ./sample-cell -->
+
+      
+    </div><!-- /.panel -->
+    
+  </div><!-- /#canvas -->
+  <p id="copyright"><b>松果机器人&trade; &copy; Pinecone.AI</b></p>
+  <script  src="./ui.js"></script>
+  <script  src="./hardware.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
