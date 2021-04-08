@@ -1,0 +1,183 @@
+/** Page **/
+
+html,
+body {
+    background: #3c57f1;
+    margin: 0;
+    padding: 0;
+}
+
+.bg_img {
+    /* display: inline; */
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    /* width: 1920px;
+    height: 1080px; */
+}
+
+.chg_img {
+    /* display: inline; */
+    visibility: hidden;
+    /* width: 1920px;
+    height: 1080px; */
+}
+
+#弹 {
+    /* display: inline; */
+    position: absolute;
+    left: 2000px;
+    bottom: 420px;
+    /* width: 1920px;
+    height: 1080px; */
+}
+
+#弹2 {
+    /* display: inline; */
+    position: absolute;
+    left: 2000px;
+    bottom: 420px;
+    /* width: 1920px;
+    height: 1080px; */
+}
+
+#雷 {
+    /* display: inline; */
+    position: absolute;
+    left: 2000px;
+    bottom: 150px;
+    /* width: 1920px;
+    height: 1080px; */
+}
+
+#雷2 {
+    /* display: inline; */
+    position: absolute;
+    left: 2000px;
+    bottom: 150px;
+    /* width: 1920px;
+    height: 1080px; */
+}
+
+#小红军 {
+    /* display: inline; */
+    position: absolute;
+    left: 300px;
+    bottom: 100px;
+    /* width: 1920px;
+    height: 1080px; */
+}
+
+
+/******************************************************************************************/
+
+
+/* Background Panel */
+
+#bgPanel {
+    display: inline;
+    position: fixed;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    /* visibility: hidden; */
+    /* background: rgba(6, 88, 241, 0.5);  */
+}
+
+#title {
+    display: block;
+    margin-top: 120px;
+    margin-left: 25px;
+    color: rgb(255, 255, 255);
+    letter-spacing: 6px;
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.resultPanel {
+    display: block;
+    margin-top: 10px;
+    margin-left: 25px;
+    flex-direction: row;
+    color: #f1f1f1;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.resultPanel span {
+    color: rgb(255, 213, 25);
+    font-weight: 600;
+}
+
+.gameResult {
+    position: absolute;
+    left: 800px;
+    top: 100px;
+    color: red;
+    font-size: 120px;
+    font-weight: 700;
+    visibility: hidden;
+}
+
+
+/******************************************************************************************/
+
+
+/** UI Panel: Game UI **/
+
+#UI {
+    display: inline;
+    position: fixed;
+    visibility: visible;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    /* background: rgba(6, 88, 241, 0.5);  */
+}
+
+#again {
+    position: absolute;
+    left: 780px;
+    top: 260px;
+    color: rgb(24, 22, 36);
+    font-size: 40px;
+    font-weight: 600;
+    visibility: hidden;
+}
+
+#time {
+    position: absolute;
+    left: 70px;
+    top: 1000px;
+    color: rgb(24, 22, 36);
+    font-size: 40px;
+    font-weight: 600;
+    visibility: visible;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+
+/******************************************************************************************/
+
+
+/* Coordinate Display for debug */
+
+#mouseEvent {
+    display: inline;
+    position: fixed;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    /* background: rgba(6, 88, 241, 0.5);  */
+    font-size: 26px;
+    color: rgb(255, 255, 255);
+}

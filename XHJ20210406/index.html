@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>小红军过草地</title>
+
+    <!-- TF libraries -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.7.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-data@2.7.0/dist/tf-data.min.js"></script> -->
+    <script src="libraries/tf-data.min.js"></script>
+    <script src="libraries/tf.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.4.0/dist/speech-commands.min.js"></script>
+
+
+
+
+    <!-- CSS link -->
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+
+
+<body>
+    <!-- Boot -->
+    <!-- <div id="no-webcam">
+    没有检测到相机！ <br/>
+    为了运行本系统，请连接好并允许打开相机。
+  </div> -->
+
+    <!-- <video autoplay id="beginVideo" width="1920" height="1080"></video> -->
+
+
+
+    <!-- <audio id="疑问声">
+    <source src="src/question.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio> -->
+
+
+    <!-- ------------------------------------------------------------------------------ -->
+    <!-- Background Panel: gaming scene  -->
+    <div id="bgPanel">
+
+
+
+        <label id=title>小红军过草地</label>
+        <br/>
+        <div class="resultPanel">
+            指令识别：<span id="result">无</span> &nbsp &nbsp 确认度：
+            <span id="result-probability">0</span>%
+        </div>
+        <!-- game result -->
+        <label class=gameResult id=gameover>失败!</label>
+        <label class=gameResult id=gameEnd>胜利🎉</label>
+        <br/>
+
+        <img class="bg_img" src="src/山后.png" id="山后" />
+        <img class="bg_img" src="src/山中.png" id="山中" />
+        <img class="bg_img" src="src/山前.png" id="山前" />
+        <img class="bg_img" src="src/水.png" id="水" />
+        <img class="bg_img" src="src/草地.png" id="grass" />
+        <img class="bg_img" src="src/小红军1.png" id="小红军" />
+        <img class="chg_img" src="src/小红军1.png" id="小红军1" />
+        <img class="chg_img" src="src/小红军2.png" id="小红军2" />
+        <img class="chg_img" src="src/小红军3.png" id="小红军3" />
+        <img class="chg_img" src="src/小红军跳.png" id="小红军跳" />
+        <img class="chg_img" src="src/小红军蹲.png" id="小红军蹲" />
+        <img class="chg_img" src="src/小红军蹲2.png" id="小红军蹲2" />
+        <img class="bg_img" src="src/弹.png" id="弹" />
+        <img class="bg_img" src="src/弹.png" id="弹2" />
+        <img class="bg_img" src="src/雷.png" id="雷" />
+        <img class="bg_img" src="src/雷.png" id="雷2" />
+
+    </div>
+
+
+    <!-- ------------------------------------------------------------------------------ -->
+    <!-- Game UI -->
+    <div id="UI">
+        <button class="fullscreen-button" id="fullscreen" /><span>全屏显示</span></button>
+
+        <button class="command" id="jump" /><span>跳</span></button>
+        <button class="command" id="squat" /><span>蹲</span></button>
+        <button id="again" /><span>重新开始游戏</span></button>
+
+        <button id="time" /><span>0</span></button>
+
+
+
+
+    </div>
+
+    <!-- ------------------------------------------------------------------------------ -->
+    <!-- mouse coordinate display -->
+    <!-- <div id="mouseEvent">
+    <script type="text/javascript">
+        var id = document.getElementById('mouseEvent');
+        document.addEventListener('mousemove',function(e){
+            id.style.marginLeft = e.clientX + 'px';
+            id.style.marginTop = e.clientY + 'px';
+            id.innerHTML = "(X:" + e.clientX+",Y:"+e.clientY+ ")";
+        });
+    </script>
+  </div> -->
+
+
+    <script src="index.js"></script>
+    <script src="game.js"></script>
+
+
+</body>
+
+</html>
